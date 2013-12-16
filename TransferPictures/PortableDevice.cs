@@ -39,17 +39,17 @@ namespace TransferPictures
 
     public class PortableDeviceCollection : Collection<PortableDevice>
     {
-        private readonly PortableDeviceManager _deviceManager;
+        //private readonly PortableDeviceManager _deviceManager;
 
-        public PortableDeviceCollection()
-        {
-            this._deviceManager = new PortableDeviceManager();
-        }
+        //public PortableDeviceCollection()
+        //{
+        //    this._deviceManager = new PortableDeviceManager();
+        //}
 
-        public void Refresh()
-        {
-            //...
-        }
+        //public void Refresh()
+        //{
+        //    //...
+        //}
     }
 
     public class PortableDevice 
@@ -65,9 +65,9 @@ namespace TransferPictures
         {
             var root = new PortableDeviceFolder("DEVICE", "DEVICE");
 
-            IPortableDeviceContent content;
-            this._device.Content(out content);
-            EnumerateContents(ref content, root);
+            //IPortableDeviceContent content;
+            //this._device.Content(out content);
+            //EnumerateContents(ref content, root);
 
             return root;
         }

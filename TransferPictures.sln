@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransferPictures", "TransferPictures\TransferPictures.csproj", "{69510FCC-8ECC-4747-B8F0-D007286CAE12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaLib", "..\MediaLib\MediaLib.csproj", "{CBF222CA-4683-4B84-960D-1B0001872473}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidLib", "..\AndroidLib-master\AndroidLib\AndroidLib.csproj", "{F5F92F16-C783-4B17-B725-B06F1D725B9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,14 @@ Global
 		{69510FCC-8ECC-4747-B8F0-D007286CAE12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69510FCC-8ECC-4747-B8F0-D007286CAE12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69510FCC-8ECC-4747-B8F0-D007286CAE12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBF222CA-4683-4B84-960D-1B0001872473}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBF222CA-4683-4B84-960D-1B0001872473}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBF222CA-4683-4B84-960D-1B0001872473}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBF222CA-4683-4B84-960D-1B0001872473}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5F92F16-C783-4B17-B725-B06F1D725B9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5F92F16-C783-4B17-B725-B06F1D725B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5F92F16-C783-4B17-B725-B06F1D725B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5F92F16-C783-4B17-B725-B06F1D725B9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
