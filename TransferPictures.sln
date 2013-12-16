@@ -2,8 +2,14 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransferPictures", "TransferPictures\TransferPictures.csproj", "{69510FCC-8ECC-4747-B8F0-D007286CAE12}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CBF222CA-4683-4B84-960D-1B0001872473} = {CBF222CA-4683-4B84-960D-1B0001872473}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaLib", "..\MediaLib\MediaLib.csproj", "{CBF222CA-4683-4B84-960D-1B0001872473}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F5F92F16-C783-4B17-B725-B06F1D725B9C} = {F5F92F16-C783-4B17-B725-B06F1D725B9C}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidLib", "..\AndroidLib-master\AndroidLib\AndroidLib.csproj", "{F5F92F16-C783-4B17-B725-B06F1D725B9C}"
 EndProject
