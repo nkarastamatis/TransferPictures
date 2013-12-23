@@ -19,7 +19,6 @@ namespace TransferPictures
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new TransferPicturesForm());
-            var md = new MediaDrives();
         }
     }
 

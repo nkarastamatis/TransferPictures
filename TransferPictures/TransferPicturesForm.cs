@@ -17,6 +17,10 @@ namespace TransferPictures
 {
     public partial class TransferPicturesForm : Form
     {
+        private TransferMedia transfer = new TransferMedia();
+
+        private Thread refreshthread;
+
         public TransferPicturesForm()
         {
             InitializeComponent();
@@ -39,34 +43,48 @@ namespace TransferPictures
             };
         }
 
-        
+        private void RefreshStorage()
+        {
+            while (true)
+            {
+                if (transfer.Refresh())
+                    this.treeListView.SetObjects(transfer.MediaStorage);
+
+                Thread.Sleep(5000);
+            }
+        }
 
         private void btn_Browse_MouseClick(object sender, MouseEventArgs e)
         {
-            TransferMedia transfer = new TransferMedia();
             Thread thread = new Thread(
-                new ThreadStart(transfer.Initialize));
+                new ThreadStart(transfer.transfer));
 
             thread.Start();
 
-            while (true)
+            while (thread.IsAlive)
             {
-                if (transfer.MediaStorage == null)
-                    Thread.Sleep(500);
-                else
-                    break;
-
-                if (!thread.IsAlive)
-                    break;
+                progressBar.Value = transfer.Progress.Current;
             }
-
-            if (transfer.MediaStorage.Count != 0)
-                this.treeListView.SetObjects(transfer.MediaStorage);
-            else
-                this.treeListView.SetObjects(null);
-
             
+        }
+
+        private void TransferPicturesForm_Load(object sender, EventArgs e)
+        {
             
+        }
+
+        private void TransferPicturesForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            refreshthread.Abort();
+        }
+
+        private void TransferPicturesForm_Shown(object sender, EventArgs e)
+        {
+            // start the refresh thread    
+            refreshthread = new Thread(
+                new ThreadStart(RefreshStorage));
+
+            refreshthread.Start();
         }
 
      

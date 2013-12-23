@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btn_Browse = new System.Windows.Forms.Button();
+            this.btn_TransferMedia = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabMedia = new System.Windows.Forms.TabPage();
             this.treeListView = new BrightIdeasSoftware.TreeListView();
@@ -37,22 +37,25 @@
             this.olvColumnDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnDestination = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnIsDir = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumnPath = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnCurrentPath = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnFiles = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.tabControl1.SuspendLayout();
             this.tabMedia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeListView)).BeginInit();
             this.SuspendLayout();
             // 
-            // btn_Browse
+            // btn_TransferMedia
             // 
-            this.btn_Browse.Location = new System.Drawing.Point(402, 12);
-            this.btn_Browse.Name = "btn_Browse";
-            this.btn_Browse.Size = new System.Drawing.Size(75, 23);
-            this.btn_Browse.TabIndex = 0;
-            this.btn_Browse.Text = "Browse";
-            this.btn_Browse.UseVisualStyleBackColor = true;
-            this.btn_Browse.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btn_Browse_MouseClick);
+            this.btn_TransferMedia.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_TransferMedia.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_TransferMedia.Location = new System.Drawing.Point(12, 12);
+            this.btn_TransferMedia.Name = "btn_TransferMedia";
+            this.btn_TransferMedia.Size = new System.Drawing.Size(150, 33);
+            this.btn_TransferMedia.TabIndex = 0;
+            this.btn_TransferMedia.Text = "Transfer Media";
+            this.btn_TransferMedia.UseVisualStyleBackColor = true;
+            this.btn_TransferMedia.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btn_Browse_MouseClick);
             // 
             // tabControl1
             // 
@@ -74,7 +77,7 @@
             this.tabMedia.Padding = new System.Windows.Forms.Padding(3);
             this.tabMedia.Size = new System.Drawing.Size(806, 366);
             this.tabMedia.TabIndex = 0;
-            this.tabMedia.Text = "Media";
+            this.tabMedia.Text = "Media Storage";
             this.tabMedia.UseVisualStyleBackColor = true;
             // 
             // treeListView
@@ -83,7 +86,7 @@
             this.treeListView.AllColumns.Add(this.olvColumnDate);
             this.treeListView.AllColumns.Add(this.olvColumnDestination);
             this.treeListView.AllColumns.Add(this.olvColumnIsDir);
-            this.treeListView.AllColumns.Add(this.olvColumnPath);
+            this.treeListView.AllColumns.Add(this.olvColumnCurrentPath);
             this.treeListView.AllColumns.Add(this.olvColumnFiles);
             this.treeListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -93,13 +96,13 @@
             this.olvColumnDate,
             this.olvColumnDestination,
             this.olvColumnIsDir,
-            this.olvColumnPath,
+            this.olvColumnCurrentPath,
             this.olvColumnFiles});
             this.treeListView.Location = new System.Drawing.Point(7, 7);
             this.treeListView.Name = "treeListView";
             this.treeListView.OwnerDraw = true;
             this.treeListView.ShowGroups = false;
-            this.treeListView.Size = new System.Drawing.Size(793, 300);
+            this.treeListView.Size = new System.Drawing.Size(793, 353);
             this.treeListView.TabIndex = 1;
             this.treeListView.UseCompatibleStateImageBehavior = false;
             this.treeListView.View = System.Windows.Forms.View.Details;
@@ -132,12 +135,12 @@
             this.olvColumnIsDir.CellPadding = null;
             this.olvColumnIsDir.Text = "Directory";
             // 
-            // olvColumnPath
+            // olvColumnCurrentPath
             // 
-            this.olvColumnPath.AspectName = "Path";
-            this.olvColumnPath.CellPadding = null;
-            this.olvColumnPath.Text = "Path";
-            this.olvColumnPath.Width = 161;
+            this.olvColumnCurrentPath.AspectName = "CurrentPath";
+            this.olvColumnCurrentPath.CellPadding = null;
+            this.olvColumnCurrentPath.Text = "Current Path";
+            this.olvColumnCurrentPath.Width = 161;
             // 
             // olvColumnFiles
             // 
@@ -145,15 +148,26 @@
             this.olvColumnFiles.CellPadding = null;
             this.olvColumnFiles.Text = "Files";
             // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(169, 12);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(653, 32);
+            this.progressBar.TabIndex = 2;
+            // 
             // TransferPicturesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(838, 455);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.btn_Browse);
+            this.Controls.Add(this.btn_TransferMedia);
             this.Name = "TransferPicturesForm";
             this.Text = "Transfer Pictures";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TransferPicturesForm_FormClosed);
+            this.Load += new System.EventHandler(this.TransferPicturesForm_Load);
+            this.Shown += new System.EventHandler(this.TransferPicturesForm_Shown);
             this.tabControl1.ResumeLayout(false);
             this.tabMedia.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.treeListView)).EndInit();
@@ -163,7 +177,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btn_Browse;
+        private System.Windows.Forms.Button btn_TransferMedia;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabMedia;
         private BrightIdeasSoftware.TreeListView treeListView;
@@ -171,8 +185,9 @@
         private BrightIdeasSoftware.OLVColumn olvColumnDate;
         private BrightIdeasSoftware.OLVColumn olvColumnDestination;
         private BrightIdeasSoftware.OLVColumn olvColumnIsDir;
-        private BrightIdeasSoftware.OLVColumn olvColumnPath;
+        private BrightIdeasSoftware.OLVColumn olvColumnCurrentPath;
         private BrightIdeasSoftware.OLVColumn olvColumnFiles;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }
 
