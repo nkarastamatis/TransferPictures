@@ -20,6 +20,8 @@ namespace TransferPictures
         private TransferMedia transfer = new TransferMedia();
 
         private Thread refreshthread;
+        private Thread runningthread;
+        private Thread progressthread;
 
         public TransferPicturesForm()
         {
@@ -54,18 +56,38 @@ namespace TransferPictures
             }
         }
 
-        private void btn_Browse_MouseClick(object sender, MouseEventArgs e)
+        private void btn_TransferMedia_MouseClick(object sender, MouseEventArgs e)
         {
-            Thread thread = new Thread(
+            btn_TransferMedia.Enabled = false;
+
+            runningthread = new Thread(
                 new ThreadStart(transfer.transfer));
+           
+            runningthread.Start();
 
-            thread.Start();
+            progressthread = new Thread(
+                new ParameterizedThreadStart(ReportProgress));
 
-            while (thread.IsAlive)
-            {
-                progressBar.Value = transfer.Progress.Current;
-            }
+            progressthread.Start(runningthread);
             
+        }
+
+        private void ReportProgress(object thread)
+        {
+            while (((Thread)thread).IsAlive)
+            {
+                Thread.Sleep(1000);
+                this.Invoke((MethodInvoker)delegate
+                {
+                    progressBar.Value = transfer.Progress.Current; // runs on UI thread
+                });
+            }
+
+            this.Invoke((MethodInvoker)delegate
+            {
+                btn_TransferMedia.Enabled = true;
+                progressBar.Value = transfer.Progress.Current; // runs on UI thread
+            });
         }
 
         private void TransferPicturesForm_Load(object sender, EventArgs e)
@@ -76,6 +98,14 @@ namespace TransferPictures
         private void TransferPicturesForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             refreshthread.Abort();
+            
+            if (progressthread.IsAlive)
+                progressthread.Abort();
+
+            if (runningthread.IsAlive)
+                runningthread.Abort();
+            
+
         }
 
         private void TransferPicturesForm_Shown(object sender, EventArgs e)
@@ -86,7 +116,6 @@ namespace TransferPictures
 
             refreshthread.Start();
         }
-
      
     }
 }

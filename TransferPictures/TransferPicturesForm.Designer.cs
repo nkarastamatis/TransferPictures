@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransferPicturesForm));
             this.btn_TransferMedia = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabMedia = new System.Windows.Forms.TabPage();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.treeListView = new BrightIdeasSoftware.TreeListView();
             this.olvColumnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -39,7 +41,6 @@
             this.olvColumnIsDir = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnCurrentPath = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnFiles = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.tabControl1.SuspendLayout();
             this.tabMedia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeListView)).BeginInit();
@@ -55,7 +56,7 @@
             this.btn_TransferMedia.TabIndex = 0;
             this.btn_TransferMedia.Text = "Transfer Media";
             this.btn_TransferMedia.UseVisualStyleBackColor = true;
-            this.btn_TransferMedia.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btn_Browse_MouseClick);
+            this.btn_TransferMedia.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btn_TransferMedia_MouseClick);
             // 
             // tabControl1
             // 
@@ -79,6 +80,13 @@
             this.tabMedia.TabIndex = 0;
             this.tabMedia.Text = "Media Storage";
             this.tabMedia.UseVisualStyleBackColor = true;
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(169, 12);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(653, 32);
+            this.progressBar.TabIndex = 2;
             // 
             // treeListView
             // 
@@ -148,13 +156,6 @@
             this.olvColumnFiles.CellPadding = null;
             this.olvColumnFiles.Text = "Files";
             // 
-            // progressBar
-            // 
-            this.progressBar.Location = new System.Drawing.Point(169, 12);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(653, 32);
-            this.progressBar.TabIndex = 2;
-            // 
             // TransferPicturesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -163,6 +164,7 @@
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btn_TransferMedia);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TransferPicturesForm";
             this.Text = "Transfer Pictures";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TransferPicturesForm_FormClosed);
