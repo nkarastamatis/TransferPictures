@@ -35,6 +35,10 @@
     <ApplicationIcon>1387868674_16599.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Mail, Version=3.0.13358.1021, Culture=neutral, PublicKeyToken=6dc438ab78a525b3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Mail\Redistributables\Mail.dll</HintPath>
+    </Reference>
     <Reference Include="MediaLib">
       <HintPath>..\..\MediaLib\bin\$(ConfigurationName)\MediaLib.dll</HintPath>
     </Reference>
@@ -52,6 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LoginDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginDialog.Designer.cs">
+      <DependentUpon>LoginDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="PortableDevice.cs" />
     <Compile Include="TransferPicturesForm.cs">
       <SubType>Form</SubType>
@@ -61,6 +71,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="LoginDialog.resx">
+      <DependentUpon>LoginDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TransferPicturesForm.resx">
       <DependentUpon>TransferPicturesForm.cs</DependentUpon>
     </EmbeddedResource>

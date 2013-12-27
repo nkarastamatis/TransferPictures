@@ -16,34 +16,14 @@ namespace TransferPictures
         [STAThread]
         static void Main()
         {
+            Cursor.Current = Cursors.WaitCursor;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new TransferPicturesForm());
         }
     }
 
-    public class MediaDrives
-    {
-        //public DriveInfo drives;
-
-        public MediaDrives()
-        {
-            var allDrives = DriveInfo.GetDrives();
-            ManagementObjectCollection collection;
-            using (var searcher = new ManagementObjectSearcher(@"Select * From Win32_USBHub"))
-                collection = searcher.Get();
-
-            
-            var drives = from drive in DriveInfo.GetDrives()
-                         where drive.DriveType == DriveType.Removable
-                         select drive;
-
-            foreach (var drive in drives)
-            {
-                Console.WriteLine(drive.Name);
-            }
-        }
-    }
+    
 
     //private static PortableDeviceObject WrapObject(IPortableDeviceProperties properties, string objectId)
     //    {

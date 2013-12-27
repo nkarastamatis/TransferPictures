@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using MediaLib;
 using System.Threading;
+using Limilabs.Client.IMAP;
 
 using BrightIdeasSoftware;
 
@@ -17,15 +18,18 @@ namespace TransferPictures
 {
     public partial class TransferPicturesForm : Form
     {
-        private TransferMedia transfer = new TransferMedia();
+        private TransferMedia transfer;
 
         private Thread refreshthread;
         private Thread runningthread;
         private Thread progressthread;
+        private Thread statusthread;
 
         public TransferPicturesForm()
         {
             InitializeComponent();
+
+            this.toolStripStatusLabel1.Text = String.Empty;
             //this.treeListView.CanExpandGetter = delegate(IMediaStorage x) { return true; };
             //this.treeListView.ChildrenGetter = delegate(IMediaStorage x) { return ((IMediaStorage)x).Files; };
 
@@ -47,6 +51,9 @@ namespace TransferPictures
 
         private void RefreshStorage()
         {
+            if (transfer == null)
+                transfer = new TransferMedia();
+
             while (true)
             {
                 if (transfer.Refresh())
@@ -72,6 +79,21 @@ namespace TransferPictures
             
         }
 
+        private void CheckStatus()
+        {
+            while (true)
+            {
+                Thread.Sleep(1000);
+                if (transfer == null)
+                    continue;
+
+                this.Invoke((MethodInvoker)delegate
+                {
+                    toolStripStatusLabel1.Text = transfer.Progress.Status;                    
+                });
+            }
+        }
+
         private void ReportProgress(object thread)
         {
             while (((Thread)thread).IsAlive)
@@ -79,14 +101,16 @@ namespace TransferPictures
                 Thread.Sleep(1000);
                 this.Invoke((MethodInvoker)delegate
                 {
-                    progressBar.Value = transfer.Progress.Current; // runs on UI thread
+                    toolStripStatusLabel1.Text = transfer.Progress.Status;
+                    progressBar.Value = transfer.Progress.Percent; // runs on UI thread
                 });
             }
 
             this.Invoke((MethodInvoker)delegate
             {
+                toolStripStatusLabel1.Text = transfer.Progress.Status;
                 btn_TransferMedia.Enabled = true;
-                progressBar.Value = transfer.Progress.Current; // runs on UI thread
+                progressBar.Value = transfer.Progress.Percent; // runs on UI thread
             });
         }
 
@@ -99,10 +123,13 @@ namespace TransferPictures
         {
             refreshthread.Abort();
             
-            if (progressthread.IsAlive)
+            if (progressthread != null && progressthread.IsAlive)
                 progressthread.Abort();
 
-            if (runningthread.IsAlive)
+            if (statusthread != null && statusthread.IsAlive)
+                statusthread.Abort();
+
+            if (runningthread != null && runningthread.IsAlive)
                 runningthread.Abort();
             
 
@@ -110,11 +137,30 @@ namespace TransferPictures
 
         private void TransferPicturesForm_Shown(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.Default;
+
             // start the refresh thread    
             refreshthread = new Thread(
                 new ThreadStart(RefreshStorage));
 
             refreshthread.Start();
+
+            statusthread = new Thread(
+                new ThreadStart(CheckStatus));
+
+            statusthread.Start();
+
+        }
+
+        private void ts_btn_EmailAccount_Click(object sender, EventArgs e)
+        {
+            LoginDialog login = new LoginDialog();
+            login.ShowDialog();
+
+            if (login.NewConnection != null)
+            {
+                transfer.AddMailConnection(login.NewUser, login.NewConnection);
+            }
         }
      
     }

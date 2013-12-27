@@ -33,7 +33,6 @@
             this.btn_TransferMedia = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabMedia = new System.Windows.Forms.TabPage();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.treeListView = new BrightIdeasSoftware.TreeListView();
             this.olvColumnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -41,16 +40,23 @@
             this.olvColumnIsDir = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnCurrentPath = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnFiles = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.tabControl1.SuspendLayout();
             this.tabMedia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeListView)).BeginInit();
+            this.statusStrip.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_TransferMedia
             // 
             this.btn_TransferMedia.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_TransferMedia.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_TransferMedia.Location = new System.Drawing.Point(12, 12);
+            this.btn_TransferMedia.Location = new System.Drawing.Point(12, 83);
             this.btn_TransferMedia.Name = "btn_TransferMedia";
             this.btn_TransferMedia.Size = new System.Drawing.Size(150, 33);
             this.btn_TransferMedia.TabIndex = 0;
@@ -64,10 +70,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabMedia);
-            this.tabControl1.Location = new System.Drawing.Point(12, 51);
+            this.tabControl1.Location = new System.Drawing.Point(12, 130);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(814, 392);
+            this.tabControl1.Size = new System.Drawing.Size(829, 365);
             this.tabControl1.TabIndex = 1;
             // 
             // tabMedia
@@ -76,17 +82,10 @@
             this.tabMedia.Location = new System.Drawing.Point(4, 22);
             this.tabMedia.Name = "tabMedia";
             this.tabMedia.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMedia.Size = new System.Drawing.Size(806, 366);
+            this.tabMedia.Size = new System.Drawing.Size(821, 339);
             this.tabMedia.TabIndex = 0;
             this.tabMedia.Text = "Media Storage";
             this.tabMedia.UseVisualStyleBackColor = true;
-            // 
-            // progressBar
-            // 
-            this.progressBar.Location = new System.Drawing.Point(169, 12);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(653, 32);
-            this.progressBar.TabIndex = 2;
             // 
             // treeListView
             // 
@@ -110,7 +109,7 @@
             this.treeListView.Name = "treeListView";
             this.treeListView.OwnerDraw = true;
             this.treeListView.ShowGroups = false;
-            this.treeListView.Size = new System.Drawing.Size(793, 353);
+            this.treeListView.Size = new System.Drawing.Size(808, 323);
             this.treeListView.TabIndex = 1;
             this.treeListView.UseCompatibleStateImageBehavior = false;
             this.treeListView.View = System.Windows.Forms.View.Details;
@@ -156,11 +155,65 @@
             this.olvColumnFiles.CellPadding = null;
             this.olvColumnFiles.Text = "Files";
             // 
+            // progressBar
+            // 
+            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar.Location = new System.Drawing.Point(169, 83);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(672, 32);
+            this.progressBar.TabIndex = 2;
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip.Location = new System.Drawing.Point(0, 498);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(853, 22);
+            this.statusStrip.TabIndex = 3;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(838, 17);
+            this.toolStripStatusLabel1.Spring = true;
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.toolStrip1.Size = new System.Drawing.Size(853, 71);
+            this.toolStrip1.Stretch = true;
+            this.toolStrip1.TabIndex = 4;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(68, 68);
+            this.toolStripButton1.Text = "Login to Email Account";
+            this.toolStripButton1.Click += new System.EventHandler(this.ts_btn_EmailAccount_Click);
+            // 
             // TransferPicturesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(838, 455);
+            this.ClientSize = new System.Drawing.Size(853, 520);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btn_TransferMedia);
@@ -173,7 +226,12 @@
             this.tabControl1.ResumeLayout(false);
             this.tabMedia.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.treeListView)).EndInit();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -190,6 +248,10 @@
         private BrightIdeasSoftware.OLVColumn olvColumnCurrentPath;
         private BrightIdeasSoftware.OLVColumn olvColumnFiles;
         private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 
