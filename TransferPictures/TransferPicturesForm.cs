@@ -162,6 +162,11 @@ namespace TransferPictures
                 transfer.AddMailConnection(login.NewUser, login.NewConnection);
             }
         }
+
+        private void ts_btn_DeleteStorage_Click(object sender, EventArgs e)
+        {
+            transfer.delete();
+        }
      
     }
 }
